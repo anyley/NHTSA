@@ -61,5 +61,8 @@
     "dev": "NODE_ENV=development webpack-dev-server --hot --inline --progress --config webpack.config.dev.babel.js",
     "start": "node ./src/server.js",
     "eslint": "node node_modules/eslint/bin/eslint.js src"
+  },
+  "engines": {
+    "node": "^8.9.3"
   }
 }
