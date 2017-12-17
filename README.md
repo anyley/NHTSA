@@ -1,5 +1,7 @@
 # NHTSA test job
 
+![desktop.gif](/desktop.gif)
+
 ## Install
 
 ```bash
