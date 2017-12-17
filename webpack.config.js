@@ -8,7 +8,7 @@ process.noDeprecation = true
 
 export default () => ({
   entry: {
-    bundle: './src/index.js'
+    bundle: './src/index.js',
   },
 
   resolve: {

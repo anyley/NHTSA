@@ -14,9 +14,9 @@ process.noDeprecation = true
 export default () => {
   return webpackMerge(commonConfig(), {
     output: {
-      path:       path.resolve(__dirname, '../api/app'),
+      path:       path.resolve(__dirname, './public'),
       filename:   '[name].[hash:7].js',
-      publicPath: '/'
+      publicPath: '/public'
     },
 
     plugins: [

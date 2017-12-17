@@ -26,6 +26,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "browserslist": "^2.10.0",
+    "compression-webpack-plugin": "^1.1.2",
     "css-loader": "^0.28.7",
     "eslint": "^4.13.1",
     "eslint-config-standard": "^11.0.0-beta.0",
@@ -40,6 +41,7 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-standard": "^3.0.1",
+    "express": "^4.16.2",
     "flow": "^0.2.3",
     "flow-bin": "^0.61.0",
     "html-webpack-plugin": "^2.30.1",
@@ -58,7 +60,8 @@
   "scripts": {
     "test": "NODE_ENV=test node node_modules/jest/bin/jest",
     "build-prod": "NODE_ENV=production node node_modules/webpack/bin/webpack --progress --config webpack.config.prod.babel.js",
-    "start": "NODE_ENV=development webpack-dev-server --hot --inline --progress --config webpack.config.dev.babel.js",
+    "dev": "NODE_ENV=development webpack-dev-server --hot --inline --progress --config webpack.config.dev.babel.js",
+    "start": "node ./src/server.js",
     "eslint": "node node_modules/eslint/bin/eslint.js src"
   }
 }
