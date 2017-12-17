@@ -39,6 +39,6 @@ export const decode = vin => async (dispatch, getState, { api }) => {
     const result = await api.decode(vin)
     dispatch(decodeSuccess(result, vin))
   } catch(e) {
-    dispatch(decodeFailure('Sorry, service unavailable', vin))
+    dispatch(decodeFailure('Sorry, service currently unavailable. Using cache data.', vin))
   }
 }

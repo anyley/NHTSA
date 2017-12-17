@@ -14,12 +14,12 @@ const formStyle = {
   justifyContent: 'center',
   flexFlow:       'row nowrap',
   minWidth:       400,
-  height:         28
+  height:         36
 }
 
 
 @connect(
-  ({ form, results }) => ({ form, loading: results.isFetching }),
+  ({ form, results }) => ({ form, loading: results.isFetching, error: results.error }),
   dispatch => ({
     setVin: bindActionCreators(VinActions.setVin, dispatch),
     decode: bindActionCreators(VinActions.decode, dispatch),
@@ -32,9 +32,13 @@ export default class VinForm extends Component {
   decodeVin = () => this.props.decode(this.props.form.vin)
 
   render() {
-    const { form, setVin, loading, style } = this.props
+    const { form, setVin, loading, style, error } = this.props
     const valid = vin.validate(form.vin)
+    const errorMessage = (form.vin.length === 17 && !valid)
+      ? 'Invalid VIN code'
+      : error
 
+    console.log(error)
     return (
       <div style={{ ...formStyle, ...style }}>
         <InputVinCode
@@ -45,7 +49,7 @@ export default class VinForm extends Component {
           vin={form.vin}
           onChange={this.onChange}
           onReset={() => setVin('')}
-          error={form.vin.length === 17 && !valid && 'Invalid VIN code'}
+          error={errorMessage}
         />
 
         <Button label="Decode"

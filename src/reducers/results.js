@@ -45,11 +45,11 @@ const cache = (state = {}, action) => {
   }
 }
 
-const error = (state = {}, action) => {
+const error = (state = '', action) => {
   switch (action.type) {
     case DECODE_VIN_REQUEST:
     case DECODE_VIN_SUCCESS:
-      return {}
+      return ''
 
     case DECODE_VIN_FAILURE:
       return action.payload
