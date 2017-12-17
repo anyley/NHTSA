@@ -13,7 +13,7 @@ export class Button extends Component {
       <div
         style={{
           border:          'none', //'1px solid lightgray',
-          height:          '22px',
+          height:          '20px',
           padding:         '2px 15px',
           backgroundColor: disabled
                              ? 'lightgray'

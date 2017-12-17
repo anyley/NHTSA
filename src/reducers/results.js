@@ -4,6 +4,10 @@ import {
   DECODE_VIN_SUCCESS,
   DECODE_VIN_FAILURE
 } from '../actions/vin'
+import {
+  RESULT_SET_FILTER,
+  RESULT_SORT_ORDER,
+} from '../actions/results'
 
 
 const isFetching = (state = false, action) => {
@@ -28,15 +32,9 @@ const lastUpdate = (state = -1, action) => {
   }
 }
 
-const data = (state = '', action) => {
+const data = (state = {}, action) => {
   switch (action.type) {
-    case DECODE_VIN_REQUEST:
-      return action.payload
-
     case DECODE_VIN_SUCCESS:
-      return action.payload
-
-    case DECODE_VIN_FAILURE:
       return action.payload
 
     default:
@@ -58,9 +56,45 @@ const error = (state = {}, action) => {
   }
 }
 
+const sortBy = (state = 'Variable', action) => {
+  switch (action.type) {
+    case RESULT_SORT_ORDER:
+      return action.payload.sortBy
+
+    default:
+      return state
+  }
+}
+
+const sortOrder = (state = true, action) => {
+  switch (action.type) {
+    case RESULT_SORT_ORDER:
+      return action.payload.sortOrder
+
+    default:
+      return state
+  }
+}
+
+const filter = (state = { varFilter: '', valFilter: '' }, action) => {
+  switch (action.type) {
+    case RESULT_SET_FILTER:
+      return {
+        ...state,
+        ...action.payload
+      }
+
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   data,
   isFetching,
   lastUpdate,
+  sortBy,
+  sortOrder,
+  filter,
   error
 })
