@@ -40,7 +40,23 @@ export const ColoredVinCode = ({ vin }) => {
   )
 }
 
-export const InputVinCode = ({ error, style, vin, onChange, inputRef, hintText, onReset }) => (
+const footerStyle = {
+  color:    'red',
+  fontSize: 12,
+  margin:   '7px 0 0 5px'
+}
+
+const ErrorMessage = ({ text }) =>
+  <div style={{ ...footerStyle, color: 'red' }}>
+    {text}
+  </div>
+
+const LoadingMessage = ({ text }) =>
+  <div className="loading" style={{ ...footerStyle, color: 'green' }}>
+    {text}
+  </div>
+
+export const InputVinCode = ({ loading, loadingText, error, style, vin, onChange, inputRef, hintText, onReset }) => (
   <label style={{ flex: '0 0 253px' }}>
     <span style={{ position: 'relative', height: 24, margin: '0 10px 0 0', ...style }}>
       {vin.length > 0
@@ -62,6 +78,10 @@ export const InputVinCode = ({ error, style, vin, onChange, inputRef, hintText, 
         onChange={onChange}
       />
     </span>
-    <div style={{ color: 'red', fontSize: 12, margin: '7px 0 0 5px' }}>{error}</div>
+    {
+      loading
+        ? <LoadingMessage text={loadingText} />
+        : <ErrorMessage text={error} />
+    }
   </label>
 )

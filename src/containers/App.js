@@ -36,7 +36,7 @@ const formStyle = {
 }
 
 @connect(
-  ({ form }) => ({ form }),
+  ({ form, results }) => ({ form, results }),
   dispatch => ({
     setVin: bindActionCreators(VinActions.setVin, dispatch),
     decode: bindActionCreators(VinActions.decode, dispatch),
@@ -58,7 +58,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { form, setVin } = this.props
+    const { form, setVin, results } = this.props
     const valid = validate(form.vin)
 
     return (
@@ -66,6 +66,8 @@ export default class App extends Component {
         <div style={formStyle}>
           <InputVinCode
             hintText="Please enter your VIN"
+            loading={results.isFetching}
+            loadingText="Loading..."
             inputRef={node => this.input = node}
             vin={form.vin}
             onChange={this.onChange}
@@ -75,7 +77,7 @@ export default class App extends Component {
 
           <Button label="Decode"
                   onClick={this.decodeVin}
-                  disabled={!valid}
+                  disabled={!valid || results.isFetching}
           />
         </div>
 

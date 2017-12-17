@@ -7,3 +7,21 @@ html, body {
 dl {
   display: flex;
 }
+
+@keyframes fade_in_out {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .2;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.loading {
+  animation: fade_in_out 1s linear infinite;
+}
