@@ -16,7 +16,7 @@ export default () => {
     output: {
       path:       path.resolve(__dirname, './public'),
       filename:   '[name].[hash:7].js',
-      publicPath: '/public'
+      publicPath: '/'
     },
 
     plugins: [

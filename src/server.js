@@ -1,22 +1,9 @@
-const path = require('path')
 const express = require('express')
+const server = express()
 
-const server = function () {
-  const server = express()
-  const publicPathString = path.join(__dirname, '../public')
-  const publicPath = express.static(publicPathString)
-  const indexPath = path.join(publicPathString, '/index.html')
-
-  server.use('/public', publicPath)
-  server.get('/', function (_, res) {
-    res.sendFile(indexPath)
-  })
-
-  return server
-}
+server.use(express.static('public'))
 
 const port = (process.env.PORT || 8080)
-const app = server()
 
-app.listen(port)
+server.listen(port)
 console.log(`Listening at http://localhost:${port}`)
