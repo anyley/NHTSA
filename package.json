@@ -59,7 +59,7 @@
   ],
   "scripts": {
     "test": "NODE_ENV=test node node_modules/jest/bin/jest",
-    "build-prod": "NODE_ENV=production node node_modules/webpack/bin/webpack --progress --config webpack.config.prod.babel.js",
+    "build-prod": "NODE_ENV=production webpack --progress --config webpack.config.prod.babel.js",
     "dev": "NODE_ENV=development webpack-dev-server --hot --inline --progress --config webpack.config.dev.babel.js",
     "start": "node ./src/server.js",
     "eslint": "node node_modules/eslint/bin/eslint.js src"
