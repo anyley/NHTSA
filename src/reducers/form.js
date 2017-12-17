@@ -1,7 +1,12 @@
 import { combineReducers } from 'redux'
+import { SET_VIN } from '../actions/vin'
 
-const counter = (state = {}, action) => {
+
+const vin = (state = '', action) => {
   switch(action.type) {
+    case SET_VIN:
+      return action.payload
+
     default:
       return state
   }
@@ -9,5 +14,5 @@ const counter = (state = {}, action) => {
 
 
 export default combineReducers({
-  counter
+  vin
 })

@@ -3,13 +3,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import throttle from 'lodash/throttle'
 import { clearStorage, loadState, saveState } from './localStorage'
-import { api } from './api'
+import api from './api'
 import reducers from './reducers'
 
 
-export const initStore = () => {
-  let STORAGE_VERSION = 'v.1.0.0'
+export const STORAGE_VERSION = 'NHTSA v1.0.0'
 
+export const initStore = () => {
   const persistedState = loadState(STORAGE_VERSION)
 
   if (!persistedState) {
@@ -29,10 +29,14 @@ export const initStore = () => {
   )
 
 
-  ENV !== 'test' && store.subscribe(throttle(() => {
+  store.subscribe(throttle(() => {
     const currentState = store.getState()
-    saveState(global.STORAGE_VERSION, currentState)
+    saveState(STORAGE_VERSION, {
+      ...currentState
+    })
   }, 1000))
+
+  store.dispatch({ type: 'INITIALIZE' })
 
   return store
 }
