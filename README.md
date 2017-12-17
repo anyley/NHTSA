@@ -1,6 +1,6 @@
 # NHTSA test job
 
-![desktop.gif](/desktop.gif)
+![desktop.gif](/desktop.gif|width=600)
 
 ## Install
 
