@@ -24,11 +24,11 @@ export const decodeSuccess = (result, requestParams) => ({
   payload: result
 })
 
-export const decodeFailure = (vin, requestParams) => ({
+export const decodeFailure = (error, requestParams) => ({
   type:    DECODE_VIN_FAILURE,
   error:   true,
   meta:    { requestParams },
-  payload: vin
+  payload: error
 })
 
 
@@ -39,6 +39,6 @@ export const decode = vin => async (dispatch, getState, { api }) => {
     const result = await api.decode(vin)
     dispatch(decodeSuccess(result, vin))
   } catch(e) {
-    dispatch(decodeFailure(e, vin))
+    dispatch(decodeFailure('Sorry, service unavailable', vin))
   }
 }

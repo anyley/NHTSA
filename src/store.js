@@ -7,7 +7,7 @@ import api from './api'
 import reducers from './reducers'
 
 
-export const STORAGE_VERSION = 'NHTSA v1.0.0'
+export const STORAGE_VERSION = 'NHTSA v1.0.1'
 
 export const initStore = () => {
   const persistedState = loadState(STORAGE_VERSION)

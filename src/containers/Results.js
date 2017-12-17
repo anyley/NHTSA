@@ -58,7 +58,7 @@ const SortButton = ({ sortOrder = true }) =>
 const headerStyle = { cursor: 'pointer', userSelect: 'none' }
 
 @connect(
-  ({ results }) => ({ results }),
+  ({ form, results }) => ({ form, results }),
   dispatch => ({
     setFilter: bindActionCreators(ResultsActions.setFilter, dispatch),
     sortOrder: bindActionCreators(ResultsActions.sortOrder, dispatch),
@@ -67,14 +67,14 @@ const headerStyle = { cursor: 'pointer', userSelect: 'none' }
 export default class Results extends Component {
   changeSortOrder = column => {
     const { results: { sortOrder, sortBy } } = this.props
-    console.log({ sortBy, sortOrder: sortBy === column ? !sortOrder : sortOrder })
     this.props.sortOrder({ sortBy: column, sortOrder: sortBy === column ? !sortOrder : sortOrder })
   }
 
   render() {
-    const { results, style, setFilter } = this.props
+    const { form, results, style, setFilter } = this.props
     const { filter, sortBy, sortOrder } = results
-    const dataExists = results.data.length > 0
+    const dataExists = results && results.cache[form.vin]
+    const data = results.cache[form.vin]
 
     return (
       <div style={{ ...rootStyle, ...style }}>
@@ -134,20 +134,23 @@ export default class Results extends Component {
 
         {
           dataExists &&
-          results
-            .data
+          data
             .filter(({ Variable, Value }) =>
               Variable && Value &&
               AutoFilter.filter(filter.varFilter, Variable) &&
               AutoFilter.filter(filter.valFilter, Value)
             )
-            .map((item, idx) =>
-              <Row key={item.VariableId + '_' + idx} stripe={idx % 2 !== 0}>
+            .sort((a, b) => sortOrder
+                ? a[sortBy].toLowerCase() > b[sortBy].toLowerCase() ? 1 : -1
+                : a[sortBy].toLowerCase() < b[sortBy].toLowerCase() ? 1 : -1
+            )
+            .map(({ Variable, Value }, idx) =>
+              <Row key={idx} stripe={idx % 2 !== 0}>
                 <Column width="300px" align="right">
-                  {item.Variable}
+                  {Variable}
                 </Column>
                 <Column autofit>
-                  {item.Value}
+                  {Value}
                 </Column>
               </Row>
             )

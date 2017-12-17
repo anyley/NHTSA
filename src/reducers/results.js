@@ -32,10 +32,13 @@ const lastUpdate = (state = -1, action) => {
   }
 }
 
-const data = (state = {}, action) => {
+const cache = (state = {}, action) => {
   switch (action.type) {
     case DECODE_VIN_SUCCESS:
-      return action.payload
+      return {
+        ...state,
+        [action.meta.requestParams]: action.payload
+      }
 
     default:
       return state
@@ -90,7 +93,7 @@ const filter = (state = { varFilter: '', valFilter: '' }, action) => {
 }
 
 export default combineReducers({
-  data,
+  cache,
   isFetching,
   lastUpdate,
   sortBy,
